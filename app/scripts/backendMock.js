@@ -21,7 +21,8 @@ function setupBackendMock($httpBackend)
     var testSequence = 1;
     var tasks = {};
     [
-        {id: sequence++, title: 'Configure AngularJS routing', description: 'Some Details', repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1', assignTo: [1, 2], tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Configure AngularJS routing', description: 'Some Details', repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1', assignTo:
+                [1, 2], tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Bind Posts', description: 'Some Details', tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Bind Posts From DAO', description: 'Some Details', tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Implement DAO', description: 'Some Details', tags: ['tag1', 'tag2']},
@@ -33,10 +34,11 @@ function setupBackendMock($httpBackend)
         {id: sequence++, title: 'Drag and Drop', description: 'Some Details', tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Pagination Support', description: 'Some Details', tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Configure backend mocking', description: 'Some Details', tags: ['tag1', 'tag2']}
-    ].every(function (value) {
-            tasks[value.id] = value;
-            return true;
-        });
+    ].every(function (value)
+            {
+                tasks[value.id] = value;
+                return true;
+            });
 
     function loremIpsum(sentencesCount)
     {
@@ -56,28 +58,28 @@ function setupBackendMock($httpBackend)
         }
         return result;
     }
+
     var tests = {};
     [
-        {id: testSequence++, title: 'Angular awesome tests', description: loremIpsum(3), taskNo: 150},
-        {id: testSequence++, title: 'JavaScript great tests', description: loremIpsum(3), taskNo: 50},
-        {id: testSequence++, title: 'Other tests 1', description: loremIpsum(3), taskNo: 45},
-        {id: testSequence++, title: 'Other tests 2', description: loremIpsum(3), taskNo: 40},
-        {id: testSequence++, title: 'Other tests 3', description: loremIpsum(3), taskNo: 35},
-        {id: testSequence++, title: 'Other tests 4', description: loremIpsum(3), taskNo: 30},
-        {id: testSequence++, title: 'Other tests 5', description: loremIpsum(3), taskNo: 25},
-        {id: testSequence++, title: 'Other tests 6', description: loremIpsum(3), taskNo: 20},
-        {id: testSequence++, title: 'Other tests 7', description: loremIpsum(3), taskNo: 15},
-        {id: testSequence++, title: 'Other tests 8', description: loremIpsum(3), taskNo: 10},
-        {id: testSequence++, title: 'Other tests 9', description: loremIpsum(3), taskNo: 5},
-        {id: testSequence++, title: 'Other tests 10', description: loremIpsum(3), taskNo: 3},
+        {id: testSequence++, title: 'Angular awesome tests', description: loremIpsum(3), assignedTask: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]},
+        {id: testSequence++, title: 'JavaScript great tests', description: loremIpsum(3), assignedTask: [4, 5]},
+        {id: testSequence++, title: 'Other tests 1', description: loremIpsum(3), assignedTask: [1, 3, 5, 7, 9]},
+        {id: testSequence++, title: 'Other tests 2', description: loremIpsum(3), assignedTask: [10]},
+        {id: testSequence++, title: 'Other tests 3', description: loremIpsum(3), assignedTask: [11, 12]},
+        {id: testSequence++, title: 'Other tests 4', description: loremIpsum(3), assignedTask: [1, 2, 4, 5]},
+        {id: testSequence++, title: 'Other tests 5', description: loremIpsum(3), assignedTask: [1, 2]},
+        {id: testSequence++, title: 'Other tests 6', description: loremIpsum(3), assignedTask: [6, 7]},
+        {id: testSequence++, title: 'Other tests 7', description: loremIpsum(3), assignedTask: [8, 9, 10]},
+        {id: testSequence++, title: 'Other tests 8', description: loremIpsum(3), assignedTask: [10]},
+        {id: testSequence++, title: 'Other tests 9', description: loremIpsum(3), assignedTask: [11]},
+        {id: testSequence++, title: 'Other tests 10', description: loremIpsum(3), assignedTask: [12]},
         {id: testSequence++, title: 'Other tests with really really really really really really really long title, I dont now for what... 11',
-            description: loremIpsum(3), taskNo: 1}
+            description: loremIpsum(3), assignedTask: [1, 5, 9], taskCount: 150}
     ].every(function (value)
             {
                 tests[value.id] = value;
                 return true;
             });
-
 
     var trialSequence = 1;
     var trials = {};
@@ -106,10 +108,11 @@ function setupBackendMock($httpBackend)
             submitDate: '2014-10-25', startDate: '2014-10-20', status: 'failed'},
         {id: trialSequence++, test: 'AngularJS Test 1', student: 'Sandra', createDate: '2014-01-13',
             submitDate: '2014-01-28', startDate: '2014-01-19', status: 'passed'}
-    ].every(function (value) {
-            trials[value.id] = value;
-            return true;
-        });
+    ].every(function (value)
+            {
+                trials[value.id] = value;
+                return true;
+            });
 
     function parseQueryString(url)
     {
@@ -131,13 +134,14 @@ function setupBackendMock($httpBackend)
         return result;
     }
 
-    function randomPositiveInt(celling) {
+    function randomPositiveInt(celling)
+    {
         return Math.max(1, Math.round(Math.random() * (celling || 9)));
     }
 
 
-    var branches = ['exercise1', 'select2Exercise', 'angularExercises2', 'angularExercises2', 'testBranch',
-        'htmlExercises', 'c++v1', 'c++v2', 'pascal', 'Java', 'testingPractice', 'programingPractice'];
+    var branches = ['exercise1', 'select2Exercise', 'angularExercises2', 'angularExercises2', 'testBranch', 'htmlExercises', 'c++v1', 'c++v2', 'pascal', 'Java',
+        'testingPractice', 'programingPractice'];
 
     $httpBackend.whenGET(/\/api\/task(\?.*)$/).respond(function (method, url)
     {
@@ -216,17 +220,28 @@ function setupBackendMock($httpBackend)
         return [200, testData];
     });
 
-    $httpBackend.whenPOST(/\/api\/test\/(\d+)\/task/).respond(function (method, url, testData)
+    $httpBackend.whenPOST(/\/api\/test\/(\d+)\/task/).respond(function (method, url, tasks)
     {
         var match = /\/api\/test\/(\d+)\/task/.exec(url);
-        var id = parseInt(match[1], 10);
-        testData = JSON.parse(testData);
-        var associatedTasks=[];
-        return [200,associatedTasks];
+        var testId = parseInt(match[1], 10);
+        tasks = JSON.parse(tasks);
+
+        angular.forEach(tasks, function (taskId)
+        {
+            if (-1 === tests[testId].assignedTask.indexOf(taskId)) {
+                tests[testId].assignedTask.push(taskId);
+            }
+        });
+
+        var associatedTasks = [];
+        return [200, associatedTasks];
     });
 
-    $httpBackend.whenGET(/\/api\/test\/\d+\/task/).respond(function (method, url)
+    $httpBackend.whenGET(/\/api\/test\/(\d+)\/task/).respond(function (method, url)
     {
+        var match = /\/api\/test\/(\d+)\/task/.exec(url);
+        var testId = parseInt(match[1], 10);
+
         var params = parseQueryString(url);
         var first = parseInt(params.from) || 0;
         var max = parseInt(params.size) || 10;
@@ -236,7 +251,8 @@ function setupBackendMock($httpBackend)
         var searchString = params.query ? decodeUriSegment(params.query).toLowerCase() : params.query;
         angular.forEach(tasks, function (task)
         {
-            if (task && ( !searchString || -1 < task.title.toLowerCase().indexOf(searchString))) {
+
+            if (task && (-1 < tests[testId].assignedTask.indexOf(task.id)) && ( !searchString || -1 < task.title.toLowerCase().indexOf(searchString))) {
                 if ((count >= first) && (count < first + max)) {
                     result.push(task);
                 }
@@ -246,18 +262,22 @@ function setupBackendMock($httpBackend)
         return [200, {results: result, total: count}];
     });
 
-    $httpBackend.whenDELETE(/\/api\/test\/\d+\/task\/(\d+)$/).respond(function (method, url)
+    $httpBackend.whenDELETE(/\/api\/test\/(\d+)\/task\/(\d+)$/).respond(function (method, url)
     {
-        var match = /\/api\/test\/\d+\/task\/(\d+)$/.exec(url);
-        if (match) {
-            var id = parseInt(match[1], 10);
-            delete tasks[id];
+        var match = /\/api\/test\/(\d+)\/task\/(\d+)$/.exec(url);
+        var testId = parseInt(match[1], 10);
+        var taskId = parseInt(match[2], 10);
+        var position = tests[testId].assignedTask.indexOf(taskId);
+
+        if (match || -1 < position) {
+            tests[testId].assignedTask.splice(position, 1);
             return [200];
         }
         return [404];
     });
 
-    $httpBackend.whenGET(/\/api\/task\/(\d+)/).respond(function (method, url) {
+    $httpBackend.whenGET(/\/api\/task\/(\d+)/).respond(function (method, url)
+    {
         var match;
         match = /\/api\/task\/(\d+)/.exec(url);
         if (match) {
@@ -267,7 +287,8 @@ function setupBackendMock($httpBackend)
         return [404];
     });
 
-    $httpBackend.whenPOST(/\/api\/task$/).respond(function (method, url, jsonParams) {
+    $httpBackend.whenPOST(/\/api\/task$/).respond(function (method, url, jsonParams)
+    {
         var task = JSON.parse(jsonParams);
         var id;
         if (task.hasOwnProperty('id')) { // update
@@ -281,7 +302,8 @@ function setupBackendMock($httpBackend)
         }
     });
 
-    $httpBackend.whenDELETE(/\/api\/task\/(\d+)/).respond(function (method, url) {
+    $httpBackend.whenDELETE(/\/api\/task\/(\d+)/).respond(function (method, url)
+    {
         var match = /\/api\/task\/(\d+)/.exec(url);
         if (match) {
             var id = parseInt(match[1], 10);
@@ -291,7 +313,8 @@ function setupBackendMock($httpBackend)
         return [404];
     });
 
-    $httpBackend.whenGET(/\/api\/task\/branches\/(.*)(\?.*)/).respond(function (method, url) {
+    $httpBackend.whenGET(/\/api\/task\/branches\/(.*)(\?.*)/).respond(function (method, url)
+    {
         var match = /\/api\/task\/branches\/(.*)(\?.*)/.exec(url);
         var queryParams = parseQueryString(match[2]);
         var query = queryParams.query || '';
@@ -311,7 +334,8 @@ function setupBackendMock($httpBackend)
         return [200, trial];
     });
 
-    $httpBackend.whenGET(/\/api\/trial(\?.*)$/).respond(function (method, url) {
+    $httpBackend.whenGET(/\/api\/trial(\?.*)$/).respond(function (method, url)
+    {
         var params = parseQueryString(url);
         var first = parseInt(params.from) || 0;
         var max = parseInt(params.size) || 10;
@@ -319,9 +343,8 @@ function setupBackendMock($httpBackend)
         var count = 0;
         var result = [];
         for (var i in trials) {
-            if (trials.hasOwnProperty(i) && ((-1 < trials[i].test.indexOf(params.query) || !params.query)||
-                 (-1 < trials[i].student.indexOf(params.query) || !params.query)||
-                 (-1 < trials[i].status.indexOf(params.query) || !params.query))) {
+            if (trials.hasOwnProperty(i) && ((-1 < trials[i].test.indexOf(params.query) || !params.query) || (-1 < trials[i].student.indexOf(params.query)
+                    || !params.query) || (-1 < trials[i].status.indexOf(params.query) || !params.query))) {
                 if (count >= first && count < first + max) {
                     result.push(trials[i]);
                 }

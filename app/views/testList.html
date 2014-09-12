@@ -10,7 +10,8 @@
                         <label class="sr-only" for="testSearch">Search in tests</label>
                         <input type="text" id="testSearch" class="form-control" ng-model="testList.filter.query" placeholder="Search or create new..."/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="testList.filter.query=null"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default" type="button" ng-click="testList.filter.query=null"><i class="glyphicon glyphicon-remove"></i>
+                            </button>
                         </span>
                     </div>
                 </div>
@@ -30,14 +31,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="cursor-pointer" ng-repeat="test in testList.list" ng-click="testList.selectTest(test.id)" ng-class="{info:testList.isTestSelected(test.id)}">
+                    <tr class="cursor-pointer" ng-repeat="test in testList.list" ng-click="testList.selectTest(test.id)"
+                        ng-class="{info:testList.isTestSelected(test.id)}">
                         <td>{{ test.title }}</td>
-                        <td class="text-right"><span class="badge">{{ test.taskNo }}</span></td>
+                        <td class="text-right"><span class="badge">{{ test.assignedTask.length }}</span></td>
                     </tr>
                     </tbody>
                 </table>
 
-                <pagination class="pull-right" ng-model="testList.currentPage" total-items="testList.resultCount" items-per-page="testList.filter.maxResults"
+                <pagination class="pull-right" ng-model="testList.currentPage" total-items="testList.resultCount" items-per-page="testList.filter.size"
                             max-size="5" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
                             ng-show="testList.isPaginationNeeded()" class="pull-right"></pagination>
             </div>
@@ -82,7 +84,8 @@
                         <input type="text" id="taskSearch" class="form-control input-sm" ng-model="testDetails.filter.query"
                                placeholder="Search in tasks list below..."/>
                         <span class="input-group-btn btn-group-sm">
-                            <button class="btn btn-default" type="button" ng-click="testDetails.filter.query=null"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-default" type="button" ng-click="testDetails.filter.query=null"><i class="glyphicon glyphicon-remove"></i>
+                            </button>
                         </span>
                     </div>
 
@@ -104,11 +107,10 @@
                     <div class="well well-sm text-center">There is no more task</div>
                 </div>
 
-                <div class="panel-footer">
-                    <pagination ng-model="testDetails.currentPage" total-items="testDetails.resultCount" items-per-page="testDetails.filter.maxResults"
-                                max-size="5" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
-                                ng-show="testDetails.isPaginationNeeded()" class="pull-right"></pagination>
-                </div>
+                <pagination ng-model="testDetails.currentPage" total-items="testDetails.resultCount" items-per-page="testDetails.filter.size" max-size="5"
+                            boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
+                            ng-show="testDetails.isPaginationNeeded()" class="pull-right pagination-sm"></pagination>
+
             </div>
         </div>
     </div>
