@@ -21,8 +21,9 @@ function setupBackendMock($httpBackend)
     var testSequence = 1;
     var tasks = {};
     [
-        {id: sequence++, title: 'Configure AngularJS routing', description: 'Some Details', repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1', assignTo:
-                [1, 2], tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Configure AngularJS routing', description: 'Some Details',
+            repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1',
+            assignTo: [1, 2], tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Bind Posts', description: 'Some Details', tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Bind Posts From DAO', description: 'Some Details', tags: ['tag1', 'tag2']},
         {id: sequence++, title: 'Implement DAO', description: 'Some Details', tags: ['tag1', 'tag2']},
@@ -43,12 +44,13 @@ function setupBackendMock($httpBackend)
     function loremIpsum(sentencesCount)
     {
         var sentences = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus quis felis et posuere. ' ,
-            'Pellentesque volutpat ac mauris quis consectetur. Donec mollis tortor malesuada accumsan pulvinar. ' ,
-            'Aenean faucibus semper magna. Ut id dictum libero. Etiam viverra diam nec sem pellentesque malesuada. ' ,
-            'Quisque semper suscipit rutrum. Mauris a mollis purus, sit amet egestas tellus. ' ,
-            'Nullam vel mauris id metus vestibulum vestibulum non non tortor. Vivamus ut congue sapien, in lobortis orci. ' ,
-            'Sed iaculis metus eget erat venenatis, id vestibulum massa scelerisque. ' ,
-            'Phasellus magna mi, vestibulum quis massa in, laoreet dignissim augue. ' , 'Cras nunc leo, pellentesque sit amet interdum nec, pretium quis magna.'
+                         'Pellentesque volutpat ac mauris quis consectetur. Donec mollis tortor malesuada accumsan pulvinar. ' ,
+                         'Aenean faucibus semper magna. Ut id dictum libero. Etiam viverra diam nec sem pellentesque malesuada. ' ,
+                         'Quisque semper suscipit rutrum. Mauris a mollis purus, sit amet egestas tellus. ' ,
+                         'Nullam vel mauris id metus vestibulum vestibulum non non tortor. Vivamus ut congue sapien, in lobortis orci. ' ,
+                         'Sed iaculis metus eget erat venenatis, id vestibulum massa scelerisque. ' ,
+                         'Phasellus magna mi, vestibulum quis massa in, laoreet dignissim augue. ' ,
+                         'Cras nunc leo, pellentesque sit amet interdum nec, pretium quis magna.'
         ];
 
         var result = '';
@@ -140,8 +142,18 @@ function setupBackendMock($httpBackend)
     }
 
 
-    var branches = ['exercise1', 'select2Exercise', 'angularExercises2', 'angularExercises2', 'testBranch', 'htmlExercises', 'c++v1', 'c++v2', 'pascal', 'Java',
-        'testingPractice', 'programingPractice'];
+    var branches = ['exercise1',
+                    'select2Exercise',
+                    'angularExercises2',
+                    'angularExercises2',
+                    'testBranch',
+                    'htmlExercises',
+                    'c++v1',
+                    'c++v2',
+                    'pascal',
+                    'Java',
+                    'testingPractice',
+                    'programingPractice'];
 
     $httpBackend.whenGET(/\/api\/task(\?.*)$/).respond(function (method, url)
     {
@@ -343,8 +355,10 @@ function setupBackendMock($httpBackend)
         var count = 0;
         var result = [];
         for (var i in trials) {
-            if (trials.hasOwnProperty(i) && ((-1 < trials[i].test.indexOf(params.query) || !params.query) || (-1 < trials[i].student.indexOf(params.query)
-                    || !params.query) || (-1 < trials[i].status.indexOf(params.query) || !params.query))) {
+            if (trials.hasOwnProperty(i) &&
+                    ((-1 < trials[i].test.indexOf(params.query) || !params.query) ||
+                            (-1 < trials[i].student.indexOf(params.query) || !params.query) ||
+                            (-1 < trials[i].status.indexOf(params.query) || !params.query))) {
                 if (count >= first && count < first + max) {
                     result.push(trials[i]);
                 }

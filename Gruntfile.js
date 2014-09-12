@@ -1,5 +1,4 @@
 // Generated on 2014-09-07 using generator-angular 0.9.7
-'use strict';
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -8,6 +7,8 @@
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
+
+    'use strict';
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
