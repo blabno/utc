@@ -42,7 +42,7 @@
             angular.forEach(ctrl.tasks.list, function (task)
             {
                 if (task.selected) {
-                    selectedTasks.push(task.id)
+                    selectedTasks.push(task.id);
                 }
             });
             TestDAO.assignTasks(test.id, selectedTasks).then(refreshList);
@@ -54,7 +54,7 @@
             {
                 ctrl.assignTaskToTest(test);
                 ctrl.newTest = {};
-            })
+            });
         };
 
         this.deleteTask = function (id)

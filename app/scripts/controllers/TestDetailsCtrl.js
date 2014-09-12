@@ -56,7 +56,7 @@
                 TestDAO.removeTask(ctrl.selectedTest.id, taskId).then(function ()
                 {
                     refreshTasks();
-                    $scope.$emit('task-deleted', taskId)
+                    $scope.$emit('task-deleted', taskId);
                 });
             });
         };

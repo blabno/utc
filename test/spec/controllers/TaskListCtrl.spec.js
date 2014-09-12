@@ -1,7 +1,7 @@
 describe('TaskListCtrl', function ()
 {
     'use strict';
-
+/* global  successfulPromise*/
     var controller;
     var TaskDAOMock;
     var queryResponseA;
