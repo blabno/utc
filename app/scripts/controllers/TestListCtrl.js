@@ -27,8 +27,9 @@
 
         this.createTest = function ()
         {
-            var test = {title: ctrl.filter.query, description: 'A new test, maybe some description?', taskNo: 0};
-            TestDAO.save(test).then(function (data) {
+            var test = {title: ctrl.filter.query, description: 'A new test, maybe some description?', assignedTask: []};
+            TestDAO.save(test).then(function (data)
+            {
                 refreshTests();
                 ctrl.selectTest(data.id);
             });
@@ -43,8 +44,9 @@
             });
         });
 
-        $scope.$on('test-deleted', refreshTests);
         $scope.$on('test-saved', refreshTests);
+        $scope.$on('test-deleted', refreshTests);
+        $scope.$on('task-deleted', refreshTests);
 
         refreshTests();
     }
