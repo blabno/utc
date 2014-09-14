@@ -17,8 +17,52 @@ function setupBackendMock($httpBackend)
         return decodeUriQuery(val, true).replace(/&/gi, '%26').replace(/=/gi, '%3D').replace(/\+/gi, '%2B');
     }
 
+    function parseQueryString(url)
+    {
+        var args = url.split('?');
+        args = args[1] || args[0];
+        args = args.split('&');
+        var result = {};
+        var arg;
+        for (var i = 0; i < args.length; i++) {
+            arg = decodeURI(args[i]);
+
+            if (-1 === arg.indexOf('=')) {
+                result[arg.trim()] = true;
+            } else {
+                var kvp = arg.split('=');
+                result[kvp[0].trim()] = kvp[1].trim();
+            }
+        }
+        return result;
+    }
+
+    function randomPositiveInt(celling)
+    {
+        return Math.max(1, Math.round(Math.random() * (celling || 9)));
+    }
+
+    function loremIpsum(sentencesCount)
+    {
+        var sentences = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus quis felis et posuere. ' ,
+            'Pellentesque volutpat ac mauris quis consectetur. Donec mollis tortor malesuada accumsan pulvinar. ' ,
+            'Aenean faucibus semper magna. Ut id dictum libero. Etiam viverra diam nec sem pellentesque malesuada. ' ,
+            'Quisque semper suscipit rutrum. Mauris a mollis purus, sit amet egestas tellus. ' ,
+            'Nullam vel mauris id metus vestibulum vestibulum non non tortor. Vivamus ut congue sapien, in lobortis orci. ' ,
+            'Sed iaculis metus eget erat venenatis, id vestibulum massa scelerisque. ' ,
+            'Phasellus magna mi, vestibulum quis massa in, laoreet dignissim augue. ' ,
+            'Cras nunc leo, pellentesque sit amet interdum nec, pretium quis magna.'
+        ];
+
+        var result = '';
+        for (var i = 0; i < sentencesCount; i++) {
+            var index = Math.min(sentences.length - 1, Math.round(Math.random() * sentences.length));
+            result += sentences[index];
+        }
+        return result;
+    }
+
     var sequence = 1;
-    var testSequence = 1;
     var tasks = {};
     [
         {id: sequence++, title: 'Configure AngularJS routing', description: 'Some Details',
@@ -41,26 +85,7 @@ function setupBackendMock($httpBackend)
                 return true;
             });
 
-    function loremIpsum(sentencesCount)
-    {
-        var sentences = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus quis felis et posuere. ' ,
-                         'Pellentesque volutpat ac mauris quis consectetur. Donec mollis tortor malesuada accumsan pulvinar. ' ,
-                         'Aenean faucibus semper magna. Ut id dictum libero. Etiam viverra diam nec sem pellentesque malesuada. ' ,
-                         'Quisque semper suscipit rutrum. Mauris a mollis purus, sit amet egestas tellus. ' ,
-                         'Nullam vel mauris id metus vestibulum vestibulum non non tortor. Vivamus ut congue sapien, in lobortis orci. ' ,
-                         'Sed iaculis metus eget erat venenatis, id vestibulum massa scelerisque. ' ,
-                         'Phasellus magna mi, vestibulum quis massa in, laoreet dignissim augue. ' ,
-                         'Cras nunc leo, pellentesque sit amet interdum nec, pretium quis magna.'
-        ];
-
-        var result = '';
-        for (var i = 0; i < sentencesCount; i++) {
-            var index = Math.min(sentences.length - 1, Math.round(Math.random() * sentences.length));
-            result += sentences[index];
-        }
-        return result;
-    }
-
+    var testSequence = 1;
     var tests = {};
     [
         {id: testSequence++, title: 'Angular awesome tests', description: loremIpsum(3), assignedTask: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]},
@@ -76,7 +101,7 @@ function setupBackendMock($httpBackend)
         {id: testSequence++, title: 'Other tests 9', description: loremIpsum(3), assignedTask: [11]},
         {id: testSequence++, title: 'Other tests 10', description: loremIpsum(3), assignedTask: [12]},
         {id: testSequence++, title: 'Other tests with really really really really really really really long title, I dont now for what... 11',
-            description: loremIpsum(3), assignedTask: [1, 5, 9], taskCount: 150}
+            description: loremIpsum(3), assignedTask: [1, 5, 9]}
     ].every(function (value)
             {
                 tests[value.id] = value;
@@ -116,32 +141,6 @@ function setupBackendMock($httpBackend)
                 return true;
             });
 
-    function parseQueryString(url)
-    {
-        var args = url.split('?');
-        args = args[1] || args[0];
-        args = args.split('&');
-        var result = {};
-        var arg;
-        for (var i = 0; i < args.length; i++) {
-            arg = decodeURI(args[i]);
-
-            if (-1 === arg.indexOf('=')) {
-                result[arg.trim()] = true;
-            } else {
-                var kvp = arg.split('=');
-                result[kvp[0].trim()] = kvp[1].trim();
-            }
-        }
-        return result;
-    }
-
-    function randomPositiveInt(celling)
-    {
-        return Math.max(1, Math.round(Math.random() * (celling || 9)));
-    }
-
-
     var branches = ['exercise1',
                     'select2Exercise',
                     'angularExercises2',
@@ -174,6 +173,58 @@ function setupBackendMock($httpBackend)
             }
         });
         return [200, {results: result, total: count}];
+    });
+
+    $httpBackend.whenGET(/\/api\/task\/(\d+)/).respond(function (method, url)
+    {
+        var match;
+        match = /\/api\/task\/(\d+)/.exec(url);
+        if (match) {
+            var id = parseInt(match[1], 10);
+            return [200, tasks[id]];
+        }
+        return [404];
+    });
+
+    $httpBackend.whenPOST(/\/api\/task$/).respond(function (method, url, jsonParams)
+    {
+        var task = JSON.parse(jsonParams);
+        var id;
+        if (task.hasOwnProperty('id')) { // update
+            id = task.id;
+            tasks[id] = task;
+            return [200, tasks[id]];
+        } else { // create
+            task.id = sequence++;
+            tasks[task.id] = task;
+            return [200, tasks];
+        }
+    });
+
+    $httpBackend.whenDELETE(/\/api\/task\/(\d+)/).respond(function (method, url)
+    {
+        var match = /\/api\/task\/(\d+)/.exec(url);
+        if (match) {
+            var id = parseInt(match[1], 10);
+            delete tasks[id];
+            return [200];
+        }
+        return [404];
+    });
+
+    $httpBackend.whenGET(/\/api\/task\/branches\/(.*)(\?.*)/).respond(function (method, url)
+    {
+        var match = /\/api\/task\/branches\/(.*)(\?.*)/.exec(url);
+        var queryParams = parseQueryString(match[2]);
+        var query = queryParams.query || '';
+        var branchList = [];
+        for (var i = 0; 2 + randomPositiveInt(7) > i; i++) {
+            var branch = branches[i];
+            if (-1 < branch.indexOf(query)) {
+                branchList.push(branch);
+            }
+        }
+        return [200, branchList];
     });
 
     $httpBackend.whenGET(/\/api\/test(\?.*)$/).respond(function (method, url)
@@ -288,61 +339,14 @@ function setupBackendMock($httpBackend)
         return [404];
     });
 
-    $httpBackend.whenGET(/\/api\/task\/(\d+)/).respond(function (method, url)
-    {
-        var match;
-        match = /\/api\/task\/(\d+)/.exec(url);
-        if (match) {
-            var id = parseInt(match[1], 10);
-            return [200, tasks[id]];
-        }
-        return [404];
-    });
-
-    $httpBackend.whenPOST(/\/api\/task$/).respond(function (method, url, jsonParams)
-    {
-        var task = JSON.parse(jsonParams);
-        var id;
-        if (task.hasOwnProperty('id')) { // update
-            id = task.id;
-            tasks[id] = task;
-            return [200, tasks[id]];
-        } else { // create
-            task.id = sequence++;
-            tasks[task.id] = task;
-            return [200, tasks];
-        }
-    });
-
-    $httpBackend.whenDELETE(/\/api\/task\/(\d+)/).respond(function (method, url)
-    {
-        var match = /\/api\/task\/(\d+)/.exec(url);
-        if (match) {
-            var id = parseInt(match[1], 10);
-            delete tasks[id];
-            return [200];
-        }
-        return [404];
-    });
-
-    $httpBackend.whenGET(/\/api\/task\/branches\/(.*)(\?.*)/).respond(function (method, url)
-    {
-        var match = /\/api\/task\/branches\/(.*)(\?.*)/.exec(url);
-        var queryParams = parseQueryString(match[2]);
-        var query = queryParams.query || '';
-        var branchList = [];
-        for (var i = 0; 2 + randomPositiveInt(7) > i; i++) {
-            var branch = branches[i];
-            if (-1 < branch.indexOf(query)) {
-                branchList.push(branch);
-            }
-        }
-        return [200, branchList];
-    });
-
     $httpBackend.whenPOST(/\/api\/trial$/).respond(function (method, url, jsonParams)
     {
         var trial = JSON.parse(jsonParams);
+        trial.id = trialSequence++;
+        var date = new Date();
+        trial.createDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+        trial.status = 'open';
+        trials[trial.id] = trial;
         return [200, trial];
     });
 

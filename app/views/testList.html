@@ -49,8 +49,13 @@
 
             <div class="panel panel-info" ng-if="testDetails.selectedTest">
                 <div class="panel-heading">
+                    <button class="btn btn-success btn-xs pull-right" ng-if="!testDetails.editMode"
+                            ng-click="testDetails.sendInvitation()"><i class="glyphicon glyphicon-send"></i>Invite
+                    </button>
+
                     <h3 class="panel-title" ng-dblclick="testDetails.toggleEditMode()" ng-if="!testDetails.editMode">
-                        <strong>{{ testDetails.selectedTest.title }}</strong></h3>
+                        <strong>{{ testDetails.selectedTest.title }}</strong>
+                    </h3>
                     <label class="sr-only" for="testTitle">Test title</label>
                     <input id="testTitle" class="form-control" ng-if="testDetails.editMode" ng-model="testDetails.selectedTest.title" type="text" required>
                 </div>
@@ -72,7 +77,6 @@
                         <button class="btn btn-primary btn-sm" ng-click="testDetails.saveTest()" ng-if="testDetails.editMode">
                             <i class="glyphicon glyphicon-save"></i> Save
                         </button>
-                        <button class="btn btn-success btn-sm" ng-if="!testDetails.editMode"><i class="glyphicon glyphicon-send"></i> Invite people</button>
                     </div>
 
                 </div>
