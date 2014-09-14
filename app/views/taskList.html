@@ -50,8 +50,7 @@
             <td>{{ task.description }}</td>
             <td><span ng-repeat="tag in task.tags">{{tag}} </span></td>
             <td><a class="btn btn-primary btn-sm" ng-href="#/task/{{task.id}}"><i
-                    class="glyphicon glyphicon-info-sign"></i>
-                Show Details</a>
+                    class="glyphicon glyphicon-info-sign"></i> Show Details</a>
                 <button class="btn btn-danger btn-sm" ng-click="taskList.deleteTask(task.id)"><i
                         class="glyphicon glyphicon-remove"></i></button>
             </td>
