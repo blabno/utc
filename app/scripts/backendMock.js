@@ -344,7 +344,7 @@ function setupBackendMock($httpBackend)
         var trial = JSON.parse(jsonParams);
         trial.id = trialSequence++;
         var date = new Date();
-        trial.submitDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+        trial.createDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
         trial.status = 'open';
         trials[trial.id] = trial;
         return [200, trial];
