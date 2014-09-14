@@ -3,7 +3,7 @@
 
     'use strict';
 
-    function TestDetailsCtrl($scope, TestDAO, paginationSupport, ConfirmAction)
+    function TestDetailsCtrl($scope, TestDAO, paginationSupport, ConfirmAction, SendTrial)
     {
         var ctrl = this;
 
@@ -61,6 +61,10 @@
             });
         };
 
+        this.sendInvitation = function () {
+            SendTrial.send(ctrl.selectedTest);
+        };
+
         var refreshTasks = paginationSupport(this, function (callback)
         {
             TestDAO.getTasks(ctrl.selectedTest.id, ctrl.filter).then(function (tasks)
@@ -72,5 +76,5 @@
     }
 
     var module = angular.module('utcApp');
-    module.controller('TestDetailsCtrl', [ '$scope', 'TestDAO', 'paginationSupport', 'ConfirmAction', TestDetailsCtrl]);
+    module.controller('TestDetailsCtrl', [ '$scope', 'TestDAO', 'paginationSupport', 'ConfirmAction', 'SendTrial', TestDetailsCtrl]);
 })();

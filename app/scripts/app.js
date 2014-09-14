@@ -36,8 +36,11 @@
 
         $routeProvider
             .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
+                templateUrl: 'views/main.html'
+            })
+            .when('/tasks', {
+                templateUrl: '/views/taskList.html',
+                controller: 'TaskListCtrl as taskList'
             })
             .when('/task/:id', {
                 templateUrl: 'views/taskDetail.html',
@@ -47,17 +50,9 @@
                 templateUrl: 'views/testList.html',
                 controller: 'TestListCtrl as testList'
             })
-            .when('/trial/create', {
-                templateUrl: 'views/trialCreate.html',
-                controller: 'TrialCreateCtrl as trialCreate'
-            })
             .when('/trials', {
                 templateUrl: 'views/trialList.html',
                 controller: 'TrialListCtrl as trialList'
-            })
-            .when('/tasks', {
-                templateUrl: '/views/taskList.html',
-                controller: 'TaskListCtrl as taskList'
             })
             .otherwise({
                 redirectTo: '/'

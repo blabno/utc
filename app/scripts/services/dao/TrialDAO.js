@@ -12,6 +12,10 @@
             query: function (filter)
             {
                 return api.query(filter).$promise;
+            },
+            save: function(trial)
+            {
+                return api.save(trial).$promise;
             }
         };
     }
