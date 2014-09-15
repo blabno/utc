@@ -28,8 +28,7 @@
             minimumInputLength: 1,
             maximumSelectionSize: 10,
             createSearchChoice: function (term) {
-                var text = term + (ctrl.tags.some(function(r) { return r.text == term }));
-                return { id: term, text: text, data:term };
+                return { id: term, text: term };
             }
 
         };

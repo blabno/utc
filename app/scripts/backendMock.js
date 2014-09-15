@@ -67,18 +67,54 @@ function setupBackendMock($httpBackend)
     [
         {id: sequence++, title: 'Configure AngularJS routing', description: loremIpsum(2),
             repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1',
-            assignTo: [1, 2], tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Bind Posts', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Bind Posts From DAO', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Implement DAO', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Creating own DAO resource', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Create CRUD', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Using angular-xeditable', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Typeahead component', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Multilanguage using angular-gettext', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Drag and Drop', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Pagination Support', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
-        {id: sequence++, title: 'Configure backend mocking', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]}
+            assignTo: [1, 2], tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Bind Posts', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Bind Posts From DAO', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Implement DAO', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Creating own DAO resource', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Create CRUD', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Using angular-xeditable', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Typeahead component', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Multilanguage using angular-gettext', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Drag and Drop', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Pagination Support', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]},
+        {id: sequence++, title: 'Configure backend mocking', description: loremIpsum(2), tags: [
+            {id: 1, text: 'javascript'},
+            {id: 2, text: 'bootstrap'}
+        ]}
     ].every(function (value)
             {
                 tasks[value.id] = value;
@@ -262,7 +298,7 @@ function setupBackendMock($httpBackend)
                 tagList.push(tag);
             }
         });
-        return [200,tagList];
+        return [200, tagList];
     });
 
     $httpBackend.whenGET(/\/api\/test(\?.*)$/).respond(function (method, url)

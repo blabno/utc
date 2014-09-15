@@ -15,7 +15,7 @@
                     controller: function ($scope, $modalInstance, TrialDAO) {
                         $scope.send = function (student) {
                             var trial = {student: student.name, test: $scope.test.title};
-                            TrialDAO.save(trial).then($modalInstance.dismiss('cancel'))
+                            TrialDAO.save(trial).then($modalInstance.dismiss('cancel'));
                         };
                     },
                     resolve: {
