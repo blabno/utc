@@ -91,7 +91,7 @@
                            ui-select2="taskDetail.tagsTypeaheadConfig"
                            style="min-width:100%;">
                     <span ng-switch-when="display">
-                        <span ng-repeat="tag in taskDetail.task.tags" class="label label-default">{{tag}}</span>
+                        <span ng-repeat="tag in taskDetail.task.tags" class="label label-default">{{tag.text}}</span>
                     </span>
                 </div>
                 <div class="col-sm-5"></div>

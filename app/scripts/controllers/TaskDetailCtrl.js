@@ -9,25 +9,29 @@
         this.mode = 'display';
         this.isCreating = false;
         this.task = {};
+        this.tags = {};
 
-        this.tagsTypeahead = function (query)
-        {
-            var data = [
-                {id: 1, text: 'javascript'},
-                {id: 2, text: 'angular'},
-                {id: 3, text: 'bootstrap'},
-                {id: 4, text: 'node'},
-                {id: 5, text: 'grunt'},
-                {id: 6, text: 'git'}
-            ];
-            query.callback({results: data});
+
+        this.searchTags = function (queryObj) {
+            TaskDAO.queryTags(queryObj.term).then(function (results) {
+                ctrl.tags = results;
+                var data = { results: ctrl.tags};
+                queryObj.callback(data);
+            });
+
         };
-
         this.tagsTypeaheadConfig = {
-            query: this.tagsTypeahead,
+            query:  function (query) {
+                ctrl.searchTags(query);
+            },
             multiple: true,
             minimumInputLength: 1,
-            maximumSelectionSize: 10
+            maximumSelectionSize: 10,
+            createSearchChoice: function (term) {
+                var text = term + (ctrl.tags.some(function(r) { return r.text == term }));
+                return { id: term, text: text, data:term };
+            }
+
         };
 
         this.init = function ()
@@ -99,4 +103,3 @@
 
 
 })();
-// && !ctrl.task.branches

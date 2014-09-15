@@ -71,6 +71,10 @@
                     </div>
 
                     <div class="form-group">
+                        <button class="btn btn-primary btn-sm" ng-if="!testDetails.editMode" ng-click="testDetails.toggleEditMode()">
+                            <i class="glyphicon glyphicon-edit"></i> Edit
+                        </button>
+
                         <button class="btn btn-danger btn-sm pull-right" ng-click="testDetails.deleteTest(testDetails.selectedTest.id)">
                             <i class="glyphicon glyphicon-warning-sign"></i> Remove test
                         </button>

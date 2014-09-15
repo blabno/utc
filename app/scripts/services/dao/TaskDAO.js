@@ -4,7 +4,8 @@
     function TaskDAO($resource) {
         var api = $resource('/api/task/:a/:b', null, {
             query: {isArray: false},
-            queryBranches: {isArray: true}
+            queryBranches: {isArray: true},
+            queryTags: {isArray:true}
         });
 
         return {
@@ -13,6 +14,9 @@
             },
             queryBranches: function (repoUrl, searchQuery) {
                 return api.queryBranches({a: 'branches', b: repoUrl, query: searchQuery}).$promise;
+            },
+            queryTags: function (searchQuery) {
+                return api.queryTags({a: 'tags', query: searchQuery}).$promise;
             },
             save: function (data) {
                 return api.save(data).$promise;

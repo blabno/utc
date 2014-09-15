@@ -45,13 +45,13 @@ function setupBackendMock($httpBackend)
     function loremIpsum(sentencesCount)
     {
         var sentences = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rhoncus quis felis et posuere. ' ,
-            'Pellentesque volutpat ac mauris quis consectetur. Donec mollis tortor malesuada accumsan pulvinar. ' ,
-            'Aenean faucibus semper magna. Ut id dictum libero. Etiam viverra diam nec sem pellentesque malesuada. ' ,
-            'Quisque semper suscipit rutrum. Mauris a mollis purus, sit amet egestas tellus. ' ,
-            'Nullam vel mauris id metus vestibulum vestibulum non non tortor. Vivamus ut congue sapien, in lobortis orci. ' ,
-            'Sed iaculis metus eget erat venenatis, id vestibulum massa scelerisque. ' ,
-            'Phasellus magna mi, vestibulum quis massa in, laoreet dignissim augue. ' ,
-            'Cras nunc leo, pellentesque sit amet interdum nec, pretium quis magna.'
+                         'Pellentesque volutpat ac mauris quis consectetur. Donec mollis tortor malesuada accumsan pulvinar. ' ,
+                         'Aenean faucibus semper magna. Ut id dictum libero. Etiam viverra diam nec sem pellentesque malesuada. ' ,
+                         'Quisque semper suscipit rutrum. Mauris a mollis purus, sit amet egestas tellus. ' ,
+                         'Nullam vel mauris id metus vestibulum vestibulum non non tortor. Vivamus ut congue sapien, in lobortis orci. ' ,
+                         'Sed iaculis metus eget erat venenatis, id vestibulum massa scelerisque. ' ,
+                         'Phasellus magna mi, vestibulum quis massa in, laoreet dignissim augue. ' ,
+                         'Cras nunc leo, pellentesque sit amet interdum nec, pretium quis magna.'
         ];
 
         var result = '';
@@ -67,18 +67,18 @@ function setupBackendMock($httpBackend)
     [
         {id: sequence++, title: 'Configure AngularJS routing', description: loremIpsum(2),
             repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1',
-            assignTo: [1, 2], tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Bind Posts', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Bind Posts From DAO', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Implement DAO', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Creating own DAO resource', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Create CRUD', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Using angular-xeditable', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Typeahead component', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Multilanguage using angular-gettext', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Drag and Drop', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Pagination Support', description: loremIpsum(2), tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Configure backend mocking', description: loremIpsum(2), tags: ['tag1', 'tag2']}
+            assignTo: [1, 2], tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Bind Posts', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Bind Posts From DAO', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Implement DAO', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Creating own DAO resource', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Create CRUD', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Using angular-xeditable', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Typeahead component', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Multilanguage using angular-gettext', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Drag and Drop', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Pagination Support', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]},
+        {id: sequence++, title: 'Configure backend mocking', description: loremIpsum(2), tags: [{id: 1, text: 'javascript'}, {id: 2, text: 'bootstrap'}]}
     ].every(function (value)
             {
                 tasks[value.id] = value;
@@ -141,6 +141,7 @@ function setupBackendMock($httpBackend)
                 return true;
             });
 
+
     var branches = ['exercise1',
                     'select2Exercise',
                     'angularExercises2',
@@ -153,6 +154,20 @@ function setupBackendMock($httpBackend)
                     'Java',
                     'testingPractice',
                     'programingPractice'];
+
+    var tags = {};
+    [
+        {id: 1, text: 'javascript'},
+        {id: 2, text: 'bootstrap'},
+        {id: 3, text: 'angular'},
+        {id: 4, text: 'node'},
+        {id: 5, text: 'grunt'},
+        {id: 6, text: 'git'}
+    ].every(function (value)
+            {
+                tags[value.id] = value;
+                return true;
+            });
 
     $httpBackend.whenGET(/\/api\/task(\?.*)$/).respond(function (method, url)
     {
@@ -206,12 +221,13 @@ function setupBackendMock($httpBackend)
         var match = /\/api\/task\/(\d+)/.exec(url);
         if (match) {
             var id = parseInt(match[1], 10);
-            angular.forEach(tests, function(test) {
-            var position = test.assignedTask.indexOf(id);
-            if (-1<position) {
-                tests[test.id].assignedTask.splice(position, 1);
-                    }
-                });
+            angular.forEach(tests, function (test)
+            {
+                var position = test.assignedTask.indexOf(id);
+                if (-1 < position) {
+                    tests[test.id].assignedTask.splice(position, 1);
+                }
+            });
             delete tasks[id];
             return [200];
         }
@@ -231,6 +247,22 @@ function setupBackendMock($httpBackend)
             }
         }
         return [200, branchList];
+    });
+
+    $httpBackend.whenGET(/\/api\/task\/tags(\?.*)$/).respond(function (method, url)
+    {
+        var match = /\/api\/task\/tags(\?.*)/.exec(url);
+        var queryParams = parseQueryString(match[1]);
+        var query = queryParams.query || '';
+        var tagList = [];
+
+        angular.forEach(tags, function (tag)
+        {
+            if (tag && ( !query || -1 < tag.text.toLowerCase().indexOf(query))) {
+                tagList.push(tag);
+            }
+        });
+        return [200,tagList];
     });
 
     $httpBackend.whenGET(/\/api\/test(\?.*)$/).respond(function (method, url)
@@ -285,6 +317,7 @@ function setupBackendMock($httpBackend)
             testData.id = testSequence++;
             tests[testData.id] = testData;
         }
+        tests[testData.id] = angular.extend({assignedTask: [], tags: []}, tests[testData.id]);
 
         return [200, testData];
     });
