@@ -102,16 +102,16 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <span ng-switch="taskDetail.mode">
-                        <button ng-switch-when="edit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-ok"></span>Save
+                        <button ng-switch-when="edit" class="btn btn-default btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span> Save
                         </button>
                         <button ng-switch-when="display" ng-click="taskDetail.toggleMode()"
-                                class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>Edit
+                                class="btn btn-default btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
                         </button>
                     </span>
                     <a class="btn btn-default" ng-click="taskDetail.discard()"> <span
-                            class="glyphicon glyphicon-remove"></span>Discard</a>
+                            class="glyphicon glyphicon-remove"></span> Discard</a>
 
                 </div>
             </div>

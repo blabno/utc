@@ -65,20 +65,20 @@ function setupBackendMock($httpBackend)
     var sequence = 1;
     var tasks = {};
     [
-        {id: sequence++, title: 'Configure AngularJS routing', description: 'Some Details',
+        {id: sequence++, title: 'Configure AngularJS routing', description: loremIpsum(2),
             repositoryUrl: 'https://github.com/aniaw/angular-exercises.git', branchName: 'exercise1',
             assignTo: [1, 2], tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Bind Posts', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Bind Posts From DAO', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Implement DAO', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Creating own DAO resource', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Create CRUD', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Using angular-xeditable', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Typeahead component', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Multilanguage using angular-gettext', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Drag and Drop', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Pagination Support', description: 'Some Details', tags: ['tag1', 'tag2']},
-        {id: sequence++, title: 'Configure backend mocking', description: 'Some Details', tags: ['tag1', 'tag2']}
+        {id: sequence++, title: 'Bind Posts', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Bind Posts From DAO', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Implement DAO', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Creating own DAO resource', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Create CRUD', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Using angular-xeditable', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Typeahead component', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Multilanguage using angular-gettext', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Drag and Drop', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Pagination Support', description: loremIpsum(2), tags: ['tag1', 'tag2']},
+        {id: sequence++, title: 'Configure backend mocking', description: loremIpsum(2), tags: ['tag1', 'tag2']}
     ].every(function (value)
             {
                 tasks[value.id] = value;
@@ -206,6 +206,12 @@ function setupBackendMock($httpBackend)
         var match = /\/api\/task\/(\d+)/.exec(url);
         if (match) {
             var id = parseInt(match[1], 10);
+            angular.forEach(tests, function(test) {
+            var position = test.assignedTask.indexOf(id);
+            if (-1<position) {
+                tests[test.id].assignedTask.splice(position, 1);
+                    }
+                });
             delete tasks[id];
             return [200];
         }

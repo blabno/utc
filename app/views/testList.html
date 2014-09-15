@@ -10,7 +10,8 @@
                         <label class="sr-only" for="testSearch">Search in tests</label>
                         <input type="text" id="testSearch" class="form-control" ng-model="testList.filter.query" placeholder="Search or create new..."/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="testList.filter.query=null"><i class="glyphicon glyphicon-remove"></i>
+                            <button class="btn btn-default" type="button" ng-click="testList.filter.query=null">
+                                <i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </span>
                     </div>
@@ -50,7 +51,7 @@
             <div class="panel panel-info" ng-if="testDetails.selectedTest">
                 <div class="panel-heading">
                     <button class="btn btn-success btn-xs pull-right" ng-if="!testDetails.editMode"
-                            ng-click="testDetails.sendInvitation()"><i class="glyphicon glyphicon-send"></i>Invite
+                            ng-click="testDetails.sendInvitation()"><i class="glyphicon glyphicon-send"></i> Invite
                     </button>
 
                     <h3 class="panel-title" ng-dblclick="testDetails.toggleEditMode()" ng-if="!testDetails.editMode">
