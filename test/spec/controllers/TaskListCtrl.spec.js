@@ -16,19 +16,19 @@ describe('TaskListCtrl', function ()
 
     beforeEach(function ()
     {
-        TaskDAOMock = jasmine.createSpyObj('TaskDAO', ['query']);
+        TaskDAOMock = jasmine.createSpyObj('TaskDAO', ['query', 'remove']);
         queryResponseA = {
-            resultList: [
+            results: [
                 {id: 1},
                 {id: 2}
             ]
         };
         queryResponseB = {
-            resultList: [
+            results: [
                 {id: 3},
                 {id: 4}
             ],
-            resultCount: 40
+            total: 40
         };
         TaskDAOMock.query.andReturn(successfulPromise(queryResponseA));
     });
@@ -40,11 +40,11 @@ describe('TaskListCtrl', function ()
         }));
         it('should load tasks', function ()
         {
-            expect(controller.list).toEqual(queryResponseA.resultList);
+            expect(controller.tasks.list).toEqual(queryResponseA.results);
         });
         it('should make isPaginationNeeded return false', function ()
         {
-            expect(controller.isPaginationNeeded()).toBe(false);
+            expect(controller.tasks.isPaginationNeeded()).toBe(false);
         });
         describe('when search query is typed', function ()
         {
@@ -52,16 +52,16 @@ describe('TaskListCtrl', function ()
             {
                 TaskDAOMock.query.andReturn(successfulPromise(queryResponseB));
                 $rootScope.$digest();
-                controller.filter.searchQuery = 'abc';
+                controller.tasks.filter.query = 'abc';
                 $rootScope.$digest();
             }));
             it('should reload the results', function ()
             {
-                expect(controller.list).toEqual(queryResponseB.resultList);
+                expect(controller.tasks.list).toEqual(queryResponseB.results);
             });
             it('should call DAO with proper filters', function ()
             {
-                expect(TaskDAOMock.query).toHaveBeenCalledWith({searchQuery: 'abc', maxResults: 5, firstResult: 0 });
+                expect(TaskDAOMock.query).toHaveBeenCalledWith({query: 'abc', size: 5, from: 0 });
             });
         });
         describe('when moving to next page', function ()
@@ -70,12 +70,12 @@ describe('TaskListCtrl', function ()
             {
                 TaskDAOMock.query.andReturn(successfulPromise(queryResponseB));
                 $rootScope.$digest();
-                controller.currentPage = 2;
+                controller.tasks.currentPage = 2;
                 $rootScope.$digest();
             }));
             it('should load next results', function ()
             {
-                expect(TaskDAOMock.query).toHaveBeenCalledWith({searchQuery : null, maxResults : 5, firstResult : 5});
+                expect(TaskDAOMock.query).toHaveBeenCalledWith({query : null, size : 5, from : 5});
             });
         });
 
@@ -89,11 +89,11 @@ describe('TaskListCtrl', function ()
         }));
         it('should load tasks', function ()
         {
-            expect(controller.list).toEqual(queryResponseB.resultList);
+            expect(controller.tasks.list).toEqual(queryResponseB.results);
         });
         it('should make isPaginationNeeded return true', function ()
         {
-            expect(controller.isPaginationNeeded()).toBe(true);
+            expect(controller.tasks.isPaginationNeeded()).toBe(true);
         });
     });
 });
