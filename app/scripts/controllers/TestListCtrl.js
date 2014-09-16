@@ -27,7 +27,7 @@
 
         this.createTest = function ()
         {
-            var test = {title: ctrl.filter.query, description: 'A new test, maybe some description?', assignedTask: []};
+            var test = {title: ctrl.filter.query};
             TestDAO.save(test).then(function (data)
             {
                 refreshTests();
