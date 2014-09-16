@@ -13,12 +13,7 @@
 
         $scope.$on('test-selected', function (event, id)
         {
-            TestDAO.get(id).then(function (test)
-            {
-                ctrl.editMode = false;
-                ctrl.selectedTest = test;
-                refreshTasks();
-            });
+            refreshTest(id);
         });
 
         this.saveTest = function ()
@@ -49,13 +44,17 @@
             return !ctrl.taskList || ctrl.taskList.length === 0;
         };
 
+        this.isTestEmpty = function () {
+            return !ctrl.selectedTest.assignedTask || ctrl.selectedTest.assignedTask.length === 0;
+        };
+
         this.removeTaskFromTest = function (taskId)
         {
             ConfirmAction.open('Remove Task', 'Are you sure?').result.then(function ()
             {
                 TestDAO.removeTask(ctrl.selectedTest.id, taskId).then(function ()
                 {
-                    refreshTasks();
+                    refreshTest(ctrl.selectedTest.id);
                     $scope.$emit('task-deleted', taskId);
                 });
             });
@@ -63,6 +62,15 @@
 
         this.sendInvitation = function () {
             SendTrial.send(ctrl.selectedTest);
+        };
+
+        var refreshTest = function (id) {
+            TestDAO.get(id).then(function (test)
+            {
+                ctrl.editMode = false;
+                ctrl.selectedTest = test;
+                refreshTasks();
+            });
         };
 
         var refreshTasks = paginationSupport(this, function (callback)

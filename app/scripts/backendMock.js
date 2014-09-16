@@ -353,7 +353,7 @@ function setupBackendMock($httpBackend)
             testData.id = testSequence++;
             tests[testData.id] = testData;
         }
-        tests[testData.id] = angular.extend({assignedTask: [], tags: []}, tests[testData.id]);
+        tests[testData.id] = angular.extend({description: 'A new test, maybe some description?', assignedTask: [], tags: []}, tests[testData.id]);
 
         return [200, testData];
     });
