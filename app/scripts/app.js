@@ -1,9 +1,12 @@
-(function () {
+(function ()
+{
     'use strict';
 
-    function loggingInterceptorFactory($log) {
+    function loggingInterceptorFactory($log)
+    {
         return {
-            request: function (config) {
+            request: function (config)
+            {
                 if (!config.url.match(/.*\.html/)) {
                     var message = config.method + ' ' + config.url + ' ' + JSON.stringify(config.headers);
                     if (null != config.data) {
@@ -26,7 +29,8 @@
      */
     /*global setupBackendMock*/
     var module = angular.module('utcApp', ['ngResource', 'ngRoute', 'ngSanitize', 'ui.bootstrap', 'ui.select2']);
-    module.config(function ($httpProvider, $provide, $routeProvider) {
+    module.config(function ($httpProvider, $provide, $routeProvider)
+    {
         $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
 
         /**
@@ -34,31 +38,24 @@
          */
         $httpProvider.interceptors.push(['$log', loggingInterceptorFactory]);
 
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html'
-            })
-            .when('/tasks', {
-                templateUrl: '/views/taskList.html',
-                controller: 'TaskListCtrl as taskList'
-            })
-            .when('/task/:id', {
-                templateUrl: 'views/taskDetail.html',
-                controller: 'TaskDetailCtrl as taskDetail'
-            })
-            .when('/tests', {
-                templateUrl: 'views/testList.html',
-                controller: 'TestListCtrl as testList'
-            })
-            .when('/trials', {
-                templateUrl: 'views/trialList.html',
-                controller: 'TrialListCtrl as trialList'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
+        $routeProvider.when('/tasks', {
+                    templateUrl: '/views/taskList.html',
+                    controller: 'TaskListCtrl as taskList'
+                }).when('/task/:id', {
+                    templateUrl: 'views/taskDetail.html',
+                    controller: 'TaskDetailCtrl as taskDetail'
+                }).when('/tests', {
+                    templateUrl: 'views/testList.html',
+                    controller: 'TestListCtrl as testList'
+                }).when('/trials', {
+                    templateUrl: 'views/trialList.html',
+                    controller: 'TrialListCtrl as trialList'
+                }).otherwise({
+                    redirectTo: '/tasks'
+                });
     });
-    module.run(function ($httpBackend) {
+    module.run(function ($httpBackend)
+    {
         setupBackendMock($httpBackend);
     });
 

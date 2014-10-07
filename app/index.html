@@ -8,8 +8,8 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/select2/select2.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -27,9 +27,6 @@
 <div class="container" ng-controller="AppCtrl as app">
     <div class="header">
         <ul class="nav nav-pills pull-right">
-            <li ng-class="{'active':app.currentRoute=='/'}"><a ng-href="#">
-                <span class="glyphicon glyphicon-home"></span>
-                <span class="text">Main</span></a></li>
             <li ng-class="{'active':app.currentRoute=='/tasks'}"><a ng-href="#/tasks">
                 <span class="glyphicon glyphicon-ok-circle"></span>
                 <span class="text">Tasks</span></a></li>
@@ -46,6 +43,8 @@
     </div>
 
     <div ng-view></div>
+
+    <div class="clearfix"></div>
 
     <div class="footer">
         <p>IT Crowd &copy; 2014</p>

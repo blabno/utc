@@ -1,5 +1,4 @@
-<h1>Task List</h1>
-<div>
+<div class="task-list-view">
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <div class="col-xs-4 col-sm-3">
@@ -8,7 +7,8 @@
 
             <div class="col-xs-8 col-sm-4">
                 <label for="searchTask" class="sr-only">Filter</label>
-                <input id="searchTask" class="form-control" type="search" ng-model="taskList.tasks.filter.query" placeholder="Search by title, descriptions or tags"/>
+                <input id="searchTask" class="form-control" type="search" ng-model="taskList.tasks.filter.query"
+                       placeholder="Search by title, descriptions or tags"/>
             </div>
 
             <div class="col-xs-12 col-sm-4 col-sm-offset-1">
@@ -25,33 +25,18 @@
         </div>
     </form>
 
-    <table class="table table-hover table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>ID</th>
-            <th class="col-sm-3 ">Title</th>
-            <th class="col-sm-4">Description</th>
-            <th class="col-sm-2">Tags</th>
-            <th class="col-sm-2">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="task in taskList.tasks.list">
-            <td>
-                <label for="checkbox-{{ task.id }}" class="sr-only">checkbox</label>
-                <input id="checkbox-{{ task.id }}" type="checkbox" ng-model="task.selected">
-            </td>
-            <td>{{ task.id }}</td>
-            <td>{{ task.title }}</td>
-            <td>{{ task.description }}</td>
-            <td><span ng-repeat="tag in task.tags">{{tag.text}} </span></td>
-            <td><a class="btn btn-primary btn-sm" ng-href="#/task/{{task.id}}"><i class="glyphicon glyphicon-info-sign"></i> Show Details</a>
-                <button class="btn btn-danger btn-sm" ng-click="taskList.deleteTask(task.id)"><i class="glyphicon glyphicon-remove"></i></button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <article class="task" ng-class="{'selected':task.selected}" ng-repeat="task in taskList.tasks.list" ng-click="task.selected=!task.selected">
+            <h4>
+                <a ng-href="#/task/{{task.id}}">{{ task.title }}</a>
+                <button class="btn btn-danger btn-xs" ng-click="taskList.deleteTask(task.id)"><i class="glyphicon glyphicon-remove"></i></button>
+            </h4>
+            <div>{{ task.description }}</div>
+            <span class="label label-default" ng-repeat="tag in task.tags">{{tag.text}}</span>
+        </article>
+    </div>
 
     <pagination class="pull-right" ng-model="taskList.tasks.currentPage" total-items="taskList.tasks.resultCount" items-per-page="taskList.tasks.filter.size"
                 max-size="5" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"
